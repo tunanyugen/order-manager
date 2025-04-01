@@ -1,0 +1,22 @@
+services:
+  web:
+    build: ./build/
+    container_name: order-management-web
+    restart: always
+    tty: true
+    ports:
+      - 80:80
+      - 8000:8000
+    volumes:
+      - ./src:/var/www/html/
+  db:
+    image: mysql
+    container_name: order-management-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: main
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./var:/var/lib/mysql
