@@ -2,13 +2,13 @@ services:
   web:
     build: ./build/
     container_name: order-management-web
+    working_dir: /src
     restart: always
     tty: true
     ports:
       - 80:80
-      - 8000:8000
     volumes:
-      - ./src:/var/www/html/
+      - ./src:/src
   db:
     image: mysql
     container_name: order-management-db
