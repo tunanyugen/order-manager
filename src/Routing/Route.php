@@ -52,7 +52,7 @@ class Route{
                 echo call_user_func([$controller, $route['action']], $uriParts[$lastPartIndex]);
                 return;
             } else {
-                throw "Controller does not exist.";
+                throw new Exception("Controller does not exist.");
             }
 
         }

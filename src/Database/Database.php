@@ -13,7 +13,7 @@ class DB
         );
         // Check connection
         if ($this->connection->connect_error) {
-            die("Connection failed: " . $this->connection->connect_error);
+            throw new Exception("Connection failed: " . $this->connection->connect_error);
         }
     }
     /**
@@ -26,7 +26,7 @@ class DB
     {
         $stmt = $this->prepare($sql, $binds);
         if (!$stmt->execute()) {
-            die("Execute failed: " . htmlspecialchars($stmt->error));
+            throw new Exception("Execute failed: " . htmlspecialchars($stmt->error));
         }
         Logger::Log("New records created successfully.");
     }
@@ -59,7 +59,7 @@ class DB
     {
         $stmt = $this->connection->prepare($sql);
         if ($stmt === false) {
-            die("Prepare failed: " . htmlspecialchars($this->connection->error));
+            throw new Exception("Prepare failed: " . htmlspecialchars($this->connection->error));
         }
         if (!empty($binds)) {
             $types = str_repeat('s', count($binds));
