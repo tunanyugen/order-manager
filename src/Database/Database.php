@@ -5,11 +5,12 @@ class DB
     private mysqli $connection;
     public function __construct()
     {
+        $dotenv = parse_ini_file('.env');
         $this->connection = new mysqli(
-            'db',
-            'root',
-            'root',
-            'main'
+            $dotenv['DB_HOST'],
+            $dotenv['DB_USERNAME'], 
+            $dotenv['DB_PASSWORD'],
+            $dotenv['DB_DATABASE']
         );
         // Check connection
         if ($this->connection->connect_error) {
